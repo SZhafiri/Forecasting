@@ -18,7 +18,7 @@ ALTER TABLE indian_food ADD
 UPDATE indian_food SET
 	TotalPrice = (SELECT ProductPrice*Quantity)
 WHERE
-    TotalPrice IS NULL;
+    	TotalPrice IS NULL;
 
 # Split OrderDate
 ALTER TABLE indian_food ADD Date INT(2) AFTER `Order Date`;
@@ -27,7 +27,7 @@ ALTER TABLE indian_food ADD Year INT(4) AFTER Month;
 
 UPDATE indian_food SET
 	Date = substring_index(`Order Date`, '/', 1),
-    Month = substring_index(substring_index(`Order Date`, '/', 2), '/', -1),
+	Month = substring_index(substring_index(`Order Date`, '/', 2), '/', -1),
 	Year = substring_index(`Order Date`, '/', -1);
 
 # Create new table
@@ -52,6 +52,6 @@ UPDATE monthly_revenue
 SET
 	AverageRevenue = (SELECT Revenue/Orders)
 WHERE
-    AverageRevenue IS NULL;
+	AverageRevenue IS NULL;
     
 SELECT * FROM monthly_revenue;
